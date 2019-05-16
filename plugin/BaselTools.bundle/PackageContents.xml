@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" ProductType="Application"
+  Name="Basel Tools"
+  AppVersion="1.0"
+  Description="Tools for AutoCAD"
+  Author="Holger Rasch"
+  OnlineDocumentation=""
+  HelpFile="./Contents/Help.htm"
+  ProductCode="{D3561DD3-F7E9-4228-9A3F-9EC133752006}"
+  UpgradeCode="{AB6456AA-7F31-4AA5-B172-7D3F18718134}">
+  
+  <Components>
+    
+    <RuntimeRequirements OS="Win64" />
+    
+    <ComponentEntry
+      AppName="BaselTools"
+      ModuleName="./Contents/AutoCAD/Win64/2019/OSMIN.dll"
+      AppDescription="">
+
+      <Commands GroupName="BaselTools">
+
+        <Command Local="OSMIN" Global="OSMIN" />
+
+      </Commands>
+      
+    </ComponentEntry>
+
+  </Components>
+  
+</ApplicationPackage>
