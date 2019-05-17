@@ -25,6 +25,8 @@
       </Commands>
       
     </ComponentEntry>
+	
+    <ComponentEntry AppName="BaselTools" ModuleName="./Contents/AutoCAD/Resources/BaselTools.cuix" AppDescription="Windows CUI File" />
 
   </Components>
   

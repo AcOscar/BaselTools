@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OSMIN", "OSMIN\OSMIN.vbproj", "{464C3D02-547B-4D03-BB7D-6E5C29AC20C9}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ACA-Tools", "ACA-Tools\ACA-Tools.vbproj", "{69D3F9B5-7DBD-4092-8C8B-1887EBF28A3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{464C3D02-547B-4D03-BB7D-6E5C29AC20C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{464C3D02-547B-4D03-BB7D-6E5C29AC20C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{464C3D02-547B-4D03-BB7D-6E5C29AC20C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69D3F9B5-7DBD-4092-8C8B-1887EBF28A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69D3F9B5-7DBD-4092-8C8B-1887EBF28A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69D3F9B5-7DBD-4092-8C8B-1887EBF28A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69D3F9B5-7DBD-4092-8C8B-1887EBF28A3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
