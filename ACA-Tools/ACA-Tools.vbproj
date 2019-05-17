@@ -44,15 +44,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-  </ItemGroup>
-  <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -64,7 +55,21 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.vb" />
+    <Compile Include="Commands.vb" />
+    <Compile Include="ExcelTools\DataFilterHelp.vb" />
+    <Compile Include="ExcelTools\DataRead.vb" />
+    <Compile Include="ExcelTools\ExcelReader.vb" />
+    <Compile Include="ExcelTools\FilterColumn.vb" />
+    <Compile Include="ExcelTools\xRColumn.vb" />
+    <Compile Include="Helpers\AEC_Extension.vb" />
+    <Compile Include="Helpers\AEC_Helper.vb" />
+    <Compile Include="MatchPSDProperties\MatchFrm.Designer.vb">
+      <DependentUpon>MatchFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MatchPSDProperties\MatchFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MatchPSDProperties\MatchPropertiesPSD.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -80,13 +85,38 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SelectByProperty\SelectByProperty.vb" />
+    <Compile Include="SelectByProperty\SelectByPropertyFrm.Designer.vb">
+      <DependentUpon>SelectByPropertyFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SelectByProperty\SelectByPropertyFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spaces\AddSpaces.vb" />
+    <Compile Include="Spaces\SpaceNumbers.vb" />
+    <Compile Include="XML-Repair\xmlRepair.vb" />
+    <Compile Include="XML-Repair\XMLRepairForm.Designer.vb">
+      <DependentUpon>XMLRepairForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="XML-Repair\XMLRepairForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MatchPSDProperties\MatchFrm.resx">
+      <DependentUpon>MatchFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectByProperty\SelectByPropertyFrm.resx">
+      <DependentUpon>SelectByPropertyFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XML-Repair\XMLRepairForm.resx">
+      <DependentUpon>XMLRepairForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +129,88 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="accoremgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\accoremgd.dll</HintPath>
+    </Reference>
+    <Reference Include="acdbmgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\acdbmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\acmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AecArchDACHMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecArchDACHMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AecArchMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecArchMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AecBaseMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecBaseMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AecCoreMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecCoreMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AecProjectBaseMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecProjectBaseMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AecPropDataMgd">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecPropDataMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.AEC.Interop.Base">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\Autodesk.AEC.Interop.Base.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Autodesk.AutoCAD.Interop">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\Autodesk.AutoCAD.Interop.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Autodesk.AutoCAD.Interop.Common">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Office">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

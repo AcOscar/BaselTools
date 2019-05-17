@@ -6,9 +6,8 @@ Public Class Commands
     Public Sub Initialize() Implements IExtensionApplication.Initialize
         Dim myEd As Autodesk.AutoCAD.EditorInput.Editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor
 
-        myEd.WriteMessage(vbCr + "Herzog & de Meuron - AutoCAD Architecture Tools loaded: " &
-                          My.Application.Info.Version.ToString & " - " &
-                          IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly.Location).ToString("d.MM.yy HH:mm:ss") & vbCrLf)
+        myEd.WriteMessage(vbCr + "Loading Basel Tools - AutoCAD Architecture Tools V" & My.Application.Info.Version.ToString & " ... " &
+                  IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly.Location).ToString("d.MM.yy HH:mm:ss") & vbCrLf)
 
     End Sub
 
@@ -16,53 +15,44 @@ Public Class Commands
 
     End Sub
 
-    'off ACA2019 HOR leaving
-    '<CommandMethod("HdM-NET-Tools", "AddFromTemplate", CommandFlags.Modal)>
-    'Sub Command_AddFromTemplate()
 
-    '    FromACATemplate.Main.Add("AFT")
+    <CommandMethod("BaselTools", "CompletionHelper", CommandFlags.UsePickSet)>
+    Sub Command_CompletionHelper()
 
-    'End Sub
+        ExcelTools.ExcelReader.Start("CompletionHelper")
 
-    'off ACA2019 HOR leaving
-    '<CommandMethod("HdM-NET-Tools", "CompletionHelper", CommandFlags.UsePickSet)>
-    'Sub Command_CompletionHelper()
+    End Sub
 
-    '    ExcelTools.ExcelReader.Start("CompletionHelper")
+    <CommandMethod("BaselTools", "DataFilter", CommandFlags.UsePickSet)>
+    Sub Command_DataFilter()
 
-    'End Sub
+        ExcelTools.ExcelReader.Start("DataFilter")
 
-    'off ACA2019 HOR leaving
-    '<CommandMethod("HdM-NET-Tools", "DataFilter", CommandFlags.UsePickSet)>
-    'Sub Command_DataFilter()
+    End Sub
 
-    '    ExcelTools.ExcelReader.Start("DataFilter")
-
-    'End Sub
-
-    <CommandMethod("HdM-NET-Tools", "ExcelReader", CommandFlags.Modal)>
+    <CommandMethod("BaselTools", "ExcelReader", CommandFlags.Modal)>
     Sub Command_ExcelReader()
 
         ExcelTools.ExcelReader.ExcelReader(quiet:=True)
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "ExcelReaderLog", CommandFlags.Modal)>
+    <CommandMethod("BaselTools", "ExcelReaderLog", CommandFlags.Modal)>
     Sub Command_ExcelReader_Log()
 
         ExcelTools.ExcelReader.ExcelReader(quiet:=False)
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "ExcelReaderOpen", CommandFlags.Modal)>
+    <CommandMethod("BaselTools", "ExcelReaderOpen", CommandFlags.Modal)>
     Sub Command_ExcelReaderOpen()
 
         ExcelTools.ExcelReader.ExcelReaderOpen()
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "-HdMMultiSpaceAdd", CommandFlags.DocExclusiveLock)>
-    Sub Command_CmdHdMMultiSpaceAdd()
+    <CommandMethod("BaselTools", "-BSTMultiSpaceAdd", CommandFlags.DocExclusiveLock)>
+    Sub Command_CmdBSTMultiSpaceAdd()
 
         Dim mySpaces As New AddSpaces
 
@@ -70,8 +60,8 @@ Public Class Commands
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "HdMSpaceAdd", CommandFlags.DocExclusiveLock)>
-    Sub Command_HdMSpaceAdd()
+    <CommandMethod("BaselTools", "BSTSpaceAdd", CommandFlags.DocExclusiveLock)>
+    Sub Command_BSTSpaceAdd()
 
         Dim mySpaces As New AddSpaces
 
@@ -79,8 +69,8 @@ Public Class Commands
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "-HdMSpaceAdd", CommandFlags.DocExclusiveLock)>
-    Sub Command_CmdHdMSpaceAdd()
+    <CommandMethod("BaselTools", "-SpaceAdd", CommandFlags.DocExclusiveLock)>
+    Sub Command_CmdBSTSpaceAdd()
 
         Dim mySpaces As New AddSpaces
 
@@ -88,8 +78,8 @@ Public Class Commands
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "-HdMSpaceAdd2", CommandFlags.DocExclusiveLock)>
-    Sub Command_CmdHdMSpaceAdd2()
+    <CommandMethod("BaselTools", "-BSTSpaceAdd2", CommandFlags.DocExclusiveLock)>
+    Sub Command_CmdBSTSpaceAdd2()
 
         Dim mySpaces As New AddSpaces
 
@@ -98,28 +88,28 @@ Public Class Commands
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "MatchPSDProperty", CommandFlags.Modal)> _
+    <CommandMethod("BaselTools", "MatchPSDProperty", CommandFlags.Modal)>
     Sub Command_MatchPSDProperty()
 
         MatchPropertiesPSD.Match()
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "PropertyRenumber", CommandFlags.Modal)> _
+    <CommandMethod("BaselTools", "PropertyRenumber", CommandFlags.Modal)>
     Sub Command_PropertyRenumber()
 
         AECRenumber.Main()
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "SelectByProperty", CommandFlags.Modal + CommandFlags.UsePickSet)> _
+    <CommandMethod("BaselTools", "SelectByProperty", CommandFlags.Modal + CommandFlags.UsePickSet)>
     Sub Command_SelectByProperty()
 
         SelectByProperty.Main()
 
     End Sub
 
-    <CommandMethod("HdM-NET-Tools", "XMLREPAIR", CommandFlags.Modal)>
+    <CommandMethod("BaselTools", "XMLREPAIR", CommandFlags.Modal)>
     Sub Command_XMLREPAIR()
 
         xmlRepair.Main()
