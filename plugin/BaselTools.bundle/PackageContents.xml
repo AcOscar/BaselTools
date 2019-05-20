@@ -8,13 +8,13 @@
   HelpFile="./Contents/Help.htm"
   ProductCode="{D3561DD3-F7E9-4228-9A3F-9EC133752006}"
   UpgradeCode="{AB6456AA-7F31-4AA5-B172-7D3F18718134}">
-  
+
   <Components>
-    
+
     <RuntimeRequirements OS="Win64" />
-    
+
     <ComponentEntry
-      AppName="BaselTools"
+      AppName="Basel Tools OSMIN"
       ModuleName="./Contents/AutoCAD/Win64/2019/OSMIN.dll"
       AppDescription="">
 
@@ -23,11 +23,70 @@
         <Command Local="OSMIN" Global="OSMIN" />
 
       </Commands>
-      
+
     </ComponentEntry>
-	
+
+    <ComponentEntry
+      AppName="Basel Tools AutoCAD"
+      ModuleName="./Contents/AutoCAD/Win64/2019/AC-Tools.dll"
+      AppDescription="">
+
+      <Commands GroupName="Basel Tools AutoCAD">
+
+        <Command Local="RealXrefInsert" Global="RealXrefInsert"/>
+
+        <Command Local="Binsert" Global="Binsert"/>
+
+        <Command Local="DetachXref" Global="DetachXref"/>
+
+        <Command Local="BlockShaker" Global="BlockShaker"/>
+
+        <Command Local="LayerList" Global="LayerList"/>
+
+      </Commands>
+
+    </ComponentEntry>
+
+    <ComponentEntry
+      AppName="Basel Tools Architecture"
+      ModuleName="./Contents/AutoCAD/Win64/2019/ACA-Tools.dll"
+      AppDescription="">
+
+      <Commands GroupName="Basel Tools Architecture">
+
+        <Command Local="DataFilter" Global="DataFilter" />
+
+        <Command Local="CompletionHelper" Global="CompletionHelper" />
+
+        <Command Local="ExcelReader" Global="ExcelReader" />
+
+        <Command Local="ExcelReaderLog" Global="ExcelReaderLog" />
+
+        <Command Local="ExcelReaderOpen" Global="ExcelReaderOpen" />
+
+        <Command Local="-BSTMultiSpaceAdd" Global="-BSTMultiSpaceAdd"/>
+
+        <Command Local="BSTSpaceAdd" Global="BSTSpaceAdd"/>
+
+        <Command Local="-SpaceAdd" Global="-SpaceAdd" />
+
+        <Command Local="-BSTSpaceAdd2" Global="-BSTSpaceAdd2" />
+
+        <Command Local="MatchPSDProperty" Global="MatchPSDProperty" />
+
+        <Command Local="PropertyRenumber" Global="PropertyRenumber" />
+
+        <Command Local="SelectByProperty" Global="SelectByProperty" />
+
+        <Command Local="XMLREPAIR" Global="XMLREPAIR" />
+
+      </Commands>
+
+    </ComponentEntry>
+
+
     <ComponentEntry AppName="BaselTools" ModuleName="./Contents/AutoCAD/Resources/BaselTools.cuix" AppDescription="Windows CUI File" />
 
   </Components>
-  
+
 </ApplicationPackage>
