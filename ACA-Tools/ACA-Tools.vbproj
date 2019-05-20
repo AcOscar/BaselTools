@@ -213,4 +213,9 @@
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName)==Release (
+copy $(TargetDir)$(TargetFileName) $(SolutionDir)plugin\BaselTools.bundle\Contents\AutoCAD\Win64\2019\
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
