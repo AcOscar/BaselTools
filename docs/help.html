@@ -1,0 +1,303 @@
+Binsert
+
+It produces the same result as Bind & Insert for a drawing with xrefs. So it will Bind the xrefs with the insert option.
+CompletionHelper
+It is a tool that works similarly to DataFilter, and it is used the same way, but it does not filter the excel sheet at all. It provides a list of all possible values for each field and you will be able to select the one you want between all given possibilities.
+
+You need: A PSD "from style" named CompletionHelper, it must contain 2 properties:
+
+FileName: path and name to the XLS file
+DataName: the named data range in the XLS file
+It is useful to have a list of “official names” so that no one makes typing mistakes.
+
+DataFilter
+Reads property values from an Excel sheet and presents a form where properties can be selected. Its functionality is similar to the same named function in MS Excel. Excel header row names and property names must match exactly. Overrides are possible and will be marked red.
+
+You need: A PSD "from style" named DataFilter, it must contain 2 mandatory properties:
+
+FileName: path and name to the XLS file
+DataName: the named data range in the XLS file
+(optional)“Check Value” If this property is set to “True”, you can only apply your settings if all values are set to proper ones (nothing is red or there are no empty fields).
+TIP: Configure the double click action for space tab to start this command automatically. Datafilter.jpg
+
+DetachXref
+With this command you can detach(remove) a xref by clicking the xref object.
+
+ExcelReaderLog
+Produces the same result as ExcelReader but provides more output in the command line to see exactly what it does and at the same time helps to identify problems when running ExcelReader.
+
+This is a typical output in the commandline when you run the EXCELREADERLOG command:
+
+Command: EXCELREADERLOG
+ 
+Entering: Model
+Collecting: Autodesk.Aec.DatabaseServices.MultiViewBlockReference
+Entering: Save
+Reading "Planlist.xlsx!DATA"
+First Row: Title1 Title2 Title3 Phase Plan Scale Plannumber Date Author Checker Preliminary
+Work with "MultiViewBlockReference"
+Try to set Property "Title1" to:"Grundriss" - New
+Try to set Property "Title2" to:"Erdgeschoss" - New
+Try to set Property "Title3" to:"Bodenbelag" - New
+Try to set Property "Phase" to:"Ausführung" - New
+Try to set Property "Plan" to:"GREGBO" - New
+Try to set Property "Scale" to:"1:50" - New
+Try to set Property "Plannumber" to:"1000" - Skip
+Try to set Property "Date" to:"03.02.2015" - New
+Try to set Property "Author" to:"HOR" - New
+Try to set Property "Checker" to:"HOR" - New
+Try to set Property "Preliminary" to:"VORABZUG" - New
+10 created, 0 replaced, 1 skipped, 0 ignored.
+ExcelReader - Object: 1 handled.
+ExcelReader - Properties: 10 created, 0 replaced, 1 skipped, 0 ignored.
+Here are some typical messages and their meaning during the EXCELREADERLOG command:
+
+"Entering:...": looking for objects in the Modelspace or in Layoutsspaces.
+
+"Collecting:...": found an object with the "ExcelReader" Property Set Definition to work with him later.
+
+"Reading "Planlist.xlsx!DATA": Tried to read a excel file with name "Planlist.xlsx" and inside it, the named range "DATA".
+
+"File not exists: C:\Planlist.xlsx": the file or the drive is not found, or it is not readable (network or external drive).
+
+"No values in cell range name: DATA": there is no named range with name DATA or the data range is empty.
+
+"First Row:...": the values from the first row of the named range. These values must match with the property names in your property set definition.
+
+"Can't find Keyname: xxx on the yyy object": there is no property with name xxx on the object yyy. This property is needed as Keyname to find the right values in the excel sheet.
+
+"Can't find Keyvalue “xxx” on the “yyy” object, in the excel file": the value xxx was not found in the excel file for the yyy object.
+
+“Work with “xxx””: get an xxx object and work with it.
+
+“Try to set Property “xxx” to: “yyy” – Skip”: the new value is the same value as the old one, so it jumped over and let the old one as it is.
+
+“Try to set Property “xxx” to: “yyy” – Failed”: it tried to set the new value, with no success, typically because the Property was write protected like automatic properties or formulas.
+
+“Try to set Property “xxx” to: “yyy” – Replaced”: an old value was overwritten.
+
+“Try to set Property “xxx” to: “yyy” –New”: an empty property got a value.
+
+“1 created, 2 replaced, 3 skipped, 4 ignored”: that is the result of the process, 1 property got a new value, 2 were replaced, 3 were skipped and 4 were ignored (failed).
+
+"Nothing changed, xxx is empty!": there are no values in named data range(inside the Excel file).
+
+
+ExcelReaderOpen
+This command opens all used excel files which are used from the ExcelReader command.
+
+XMLREPAIR
+
+This tool was invented to repair the project navigator.
+
+For a proper work with the project navigator is it absolutely necessary that every dwg file has a related xml file. This tool creates or repaired this xml file. It is necessary that you open at least one drawing from a project navigator project. Every folder that you select will be fixed including all subfolder.
+
+XMLRepair.png
+
+
+-BSTSpaceAdd2
+to review!!!
+
+
+creates one ore more spaces this command works similiar to the -BSTSpaceAdd command with the capability to create several identically spaces
+
+the following values are mandatory:
+
+x,y and z value of the bottom left corner of the rectangular space
+length and width of the space
+number of spaces to create
+a name of PropertySetDefinition, a PropertyName and a value to this Property.
+
+This example creates 3 spaces of 2x4 meters at the location 0,0,0 with an PSD "BST-Room", the Property "RoomNumber" gets the value "A-01"
+
+-BSTSPACEADD x,y,z,length,width,numbers,PSD-Name,PropertyName,PropertyValue: 0,0,0,2,4,3,BST-Room,RoomNumber,A-01
+
+BSTspaceaddcmd.png
+
+
+This command was developed to work together within a script. Here is an simple example based on Excel:
+
+File:BSTSpaceAdd Commandline Example.xlsxMicrosoft Excel - BSTSpaceAdd Commandline Example.xlsx.png
+
+TIP: Use the ExcelReader command to fill further properties an such created space object.
+
+See also:
+
+-BSTSpaceAdd
+
+BSTSpaceAdd
+
+-BSTMultiSpaceAdd
+
+ExcelReader
+Reads property values from an Excel sheet and fills up the values with the same name into objects Properties Set Definitions when a matching Keyname is found.
+
+It is actually nothing more as an simple database query.
+
+Excel header row names and property names must match exactly.
+
+You need:
+
+A Properties Set Definition(PSD) "from style" named ExcelReader, it must contain 3 properties:
+
+FileName: path and name to the XLS file.
+DataName: the named data range in the XLS file.
+KeyName: the property name with the Value that will be matched between XLS and PSD.
+ExcelReaderPSD.png
+
+This is a screenshot of the XLS file from the example above:
+
+BST-Planlist.png
+
+inside AutoCAD we need one AEC object like a Door, a Space or a MV-Block. On this object-style we connect the ExcelReader-PSD, and fill the properties with the File-, Data- and KeyName. To transfer the information from the Excelsheet to the AEC-Object you need a PSD on that object with properties with the same name as the columns in the Excelsheet:
+
+PSDExample.png
+
+You need just a single property to fill inside AutoCAD. In our case it is the Plannumber, defined in the ExcelReader PSD as "KeyName".
+
+The Excelreader command is looking for this value in the Excel file inside the DATA named range in the column "Plannumber" for the value "1000". If he find them, the command try to fill the value from all other columns into the proprieties of the same name on the object. In our example is this all other properties. Properties and columns which are not matched exactly (it is not case sensitive) will be ignored.
+
+
+PSDExampleFilled.png
+
+Here is a small video to demonstrate the query process:
+
+
+see also
+ExcelReaderLog
+
+
+RealXrefInsert
+
+It produces the same result as Bind+Explode for a drawing with xrefs. So it will first Bind the xrefs and then will Explode the xrefs so that we have at the end a drawing with the original entities inside.
+
+OSMIN
+The OSMIN command was developed to create an Figure-ground diagram based on openstreetmap data.
+
+Be aware that the produced plan is a mercator projection. This means only along the equator the size of the plan is correct. The rest is scaled. As example in Basel is the length diference approxinatle 40% longer than the reality.
+
+CAD-BST-OSMtools.png
+
+To use this plugin you need an .osm file. You have to download them from the openstreetmap project.
+
+First click on the export option on the website (1.)
+Chose the area that you want import(2.).
+Click "Export" to download the area as .osm file(3.).
+OpenStreetMap Export.png
+
+inside AutoCAD:
+
+You can find a command button on the BST Ribbon or you type OSMIN in the command line.
+
+ImportOSM.png
+
+Select a the downloaded file and choose an importstyle.
+
+
+This is what you get with the "Black" style:
+OSMIN-Black.png
+
+
+This is what you get with the "Mapnik" style:
+OSMIN-Mapnik.png
+
+You will see more information when you using the "Mapnik" style. 
+But even there not all information are visible, some layers are switched off. All imported layers starting with name OSM_. Independently from the choose import style all available information's will be used. The (small) differences are in the color and naming of the layers.
+The imported area is geo-referenced, if you import an area 
+nearby it will be imported on the correct position. 
+"Points Of Interest" (POI) are imported as blocks on the layer 
+"OSM_NODE", all available attributes are stored as attribute.
+
+-BSTMultiSpaceAdd
+creates an several space object by a given total area and number of sub parts.
+
+the following values are mandatory:
+
+x,y,z values of the bottom left corner for all spaces the number of areas to create the total of all areas a name of PropertySetDefinition, a PropertyName and a value to this Property.
+
+
+This example creates 5 squared spaces with a sum of 25 sqm (5 spaces with 1x1 meters) at the location 0,0,0 with an PSD "BST-Room", the Property "RoomNumber" gets the value "A-03" -BSTMULTISPACEADD x,y,z,numberOfAreas,totalArea,PSD-Name,PropertyName,PropertyValue: 0,0,0,5,25,BST-Room,Roomnumber,A-03
+
+Multispace.png
+
+see also: -BSTSpaceAdd
+
+BSTSpaceAdd
+
+TIP: Use the ExcelReader command to fill further properties an such created space object.
+
+-BSTSpaceAdd
+creates an space
+
+the following values are mandatory:
+
+x,y and z value of the bottom left corner of the rectangular space
+length and width of the space
+a name of PropertySetDefinition, a PropertyName and a value to this Property.
+
+This example creates an space of 2x4 meters at the location 0,0,0 with an PSD "BST-Room", the Property "RoomNumber" gets the value "A-01"
+
+-BSTSPACEADD x,y,z,length,width,PSD-Name,PropertyName,PropertyValue: 0,0,0,2,4,BST-Room,RoomNumber,A-01
+
+BSTspaceaddcmd.png
+
+
+This command was developed to work together with a script. Here is an simple example based on Excel:
+
+File:BSTSpaceAdd Commandline Example.xlsxMicrosoft Excel - BSTSpaceAdd Commandline Example.xlsx.png
+
+TIP: Use the ExcelReader command to fill further properties an such created space object.
+
+BSTSpaceAdd
+
+creates a square space-object
+
+the following values are mandatory:
+
+the area of the space
+at least one name of a PropertySetDefinition, a PropertyName and a value to this Property.
+you can add several properties
+
+This example creates a squared space of 25 sqm (5x5 meters) at the location 0,0,0 with an PSD "BST-Room", the Property "RoomNumber" gets the value "A-02"
+
+BSTSPACEADD
+Enter the area value for the space: 25
+Enter property set definition name to add on space: BST-Room
+Enter property set definition name to add on space:
+Enter property name to set: RoomNumber
+Enter value for RoomNumber: A-02
+Enter property name to set:
+BSTspaceadd.png
+
+see also:
+
+-BSTSpaceAdd
+-BSTMultiSpaceAdd
+
+SelectByProperty
+With this tool we are able to select an AEC element dependant from his properties.
+
+On this example you will select all elements where the Level property inside the BST-Room property set definiton is "2". All related object will be add to the curretnt selection:
+
+Select by Property.png
+
+SIADIM
+In exceptional cases you can use this tool instead of the AEC dimensions, which also support DIN/SIA formating. Please discuss with us CAD managers. SIADIM is an tool to display dimension values related to the SIA or DIN standard on "normal" AutoCAD dimensions, this means centimenter are show differently as meters, and millimeter values are shown as superscript:
+
+SiaDim.png
+
+This tool needs to be implemented in a project phase by a CAD manager, it is not available otherwise.
+
+Layerlist
+creates a list of the layers you have in your current drawing: color, linetype and description. You can get a plain list(ungrouped) or an grouped list. The last one has not include AutoCAD layers 0, Ashade and Defpoints It asks for you for the insertion point of this list.
+
+The output of the LAYERLIST command, left without grouping - right grouped Layerlist.png
+
+PropertyRenumber
+This command is intend to number a property on a PropertySetDefinition (PSD). You need in addition to the PSD a polyline to describe the number order and direction. In the example below at first we number all rooms from 1 to 30 clockwise, because the red polyline was drawn clockwise. After that some spaces will be deleted and inserted so that the old numbering didn't match anymore. We repeat the command with the same polyline and all number are correct again.
+
+
+RemoveSiaDim
+This tool removes the text overide from a dimension line text. This override was produced with the SIADIM tool.
+
+AutoCAD dimension line left without and right with the SIADIM tool: 
