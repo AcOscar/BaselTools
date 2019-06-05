@@ -10,8 +10,9 @@
     <AssemblyName>ACA-Tools</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,15 +44,34 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>ACA-Tools.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>ACA-Tools.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
@@ -132,44 +152,49 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="accoremgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\accoremgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\accoremgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="acdbmgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\acdbmgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\acdbmgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="acmgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\acmgd.dll</HintPath>
-    </Reference>
-    <Reference Include="AecArchDACHMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecArchDACHMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\acmgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AecArchMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecArchMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\ACA\AecArchMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AecBaseMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecBaseMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\ACA\AecBaseMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AecCoreMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecCoreMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\ACA\AecCoreMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AecProjectBaseMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecProjectBaseMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\ACA\AecProjectBaseMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AecPropDataMgd">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\AecPropDataMgd.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\ACA\AecPropDataMgd.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.AEC.Interop.Base">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\ACA\Autodesk.AEC.Interop.Base.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\ACA\Autodesk.AEC.Interop.Base.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\Autodesk.AutoCAD.Interop.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\Autodesk.AutoCAD.Interop.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop.Common">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2019\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2017\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -178,7 +203,7 @@
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
+      <VersionMinor>8</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
@@ -187,9 +212,9 @@
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
+      <VersionMinor>9</VersionMinor>
       <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
+      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
