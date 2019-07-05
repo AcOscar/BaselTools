@@ -12,6 +12,9 @@ Public Class BlockShaker
     Shared AFuzzy As Double = 0
     Shared SFuzzy As Double = 0
 
+    ''' <summary>
+    ''' the main loop while input and preview the shaking process
+    ''' </summary>
     Sub Shaker()
         myDWG = ApplicationServices.Application.DocumentManager.MdiActiveDocument
         myDB = myDWG.Database
@@ -19,6 +22,7 @@ Public Class BlockShaker
 
         myInsertedBlocks = New DatabaseServices.ObjectIdCollection
 
+        'only block insert are allowed
         Dim tvs As DatabaseServices.TypedValue() = {New DatabaseServices.TypedValue(0, "INSERT")}
         Dim sf As New EditorInput.SelectionFilter(tvs)
 
@@ -39,6 +43,7 @@ Public Class BlockShaker
         pso.MessageForAdding = vbLf & "Select Blocks to insert:"
         pso.AllowDuplicates = False
 
+        'we use the same selection filter beacuse for the insert we need blocks as well
         Dim psrIn As EditorInput.PromptSelectionResult = myEd.GetSelection(pso, sf)
 
         If psrIn.Status = EditorInput.PromptStatus.Error Then
@@ -57,12 +62,12 @@ Public Class BlockShaker
 
             pKeyOpts.Keywords.Clear()
             pKeyOpts.Message = vbLf & "Mix Blocks (Enter to create):"
-            pKeyOpts.Keywords.Add("x", "x", "X fuzziness(" & XFuzzy & ")")
-            pKeyOpts.Keywords.Add("y", "y", "Y fuzziness(" & YFuzzy & ")")
-            pKeyOpts.Keywords.Add("z", "z", "Z fuzziness(" & ZFuzzy & ")")
-            pKeyOpts.Keywords.Add("a", "a ", "Angle fuzziness(" & AFuzzy & ")")
-            pKeyOpts.Keywords.Add("s", "s", "Scale fuzziness(" & SFuzzy & ")")
-            pKeyOpts.Keywords.Add("r", "r ", "fill Rate(" & FillRate & ")")
+            pKeyOpts.Keywords.Add("x", "x", "X-fuzziness(" & XFuzzy & ")")
+            pKeyOpts.Keywords.Add("y", "y", "Y-fuzziness(" & YFuzzy & ")")
+            pKeyOpts.Keywords.Add("z", "z", "Z-fuzziness(" & ZFuzzy & ")")
+            pKeyOpts.Keywords.Add("a", "a ", "Angle-fuzziness(" & AFuzzy & ")")
+            pKeyOpts.Keywords.Add("s", "s", "Scale-fuzziness(" & SFuzzy & ")")
+            pKeyOpts.Keywords.Add("r", "r ", "fill-Rate(" & FillRate & ")")
             pKeyOpts.Keywords.Add("f", "f", "Finish")
             pKeyOpts.AllowNone = True
 
@@ -118,6 +123,7 @@ Public Class BlockShaker
                     CreateMix(psrPos.Value, psrIn.Value)
 
                 Case "f"
+                    'otherwise on a posible new run our inserted blocks will delete
                     myInsertedBlocks = New DatabaseServices.ObjectIdCollection
                     Finish = True
 
@@ -127,6 +133,11 @@ Public Class BlockShaker
 
     End Sub
 
+    ''' <summary>
+    ''' the process to create the mixed arangement of the blocks
+    ''' </summary>
+    ''' <param name="ssPos">the selection set wtih the blocks for the position</param>
+    ''' <param name="ssIn">the selection set with all blocks to insert</param>
     Private Shared Sub CreateMix(ByRef ssPos As EditorInput.SelectionSet, ByRef ssIn As EditorInput.SelectionSet)
 
         Try
@@ -154,6 +165,7 @@ Public Class BlockShaker
 
             Using tr
 
+                'delete the (maybe) previous created blocks before we create a new mix
                 If myInsertedBlocks.Count > 0 Then
 
                     For Each bl As DatabaseServices.ObjectId In myInsertedBlocks
